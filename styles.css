@@ -1,0 +1,54 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5;
+}
+
+body {
+  font-family: "Lato", sans-serif;
+}
+
+/* Add a background color to the paragraph */
+p {
+  font-size: 0.8rem;
+  padding: 10px; /* Add some padding for spacing */
+}
+
+.accordion {
+  max-width: 600px !important;
+  margin: 50px auto;
+  box-shadow: 0 2px 25px 0 --my-pink !important;
+}
+
+.accordion-button {
+  background-color: var(--rose-fog) !important;
+  color: #fff !important;
+  position: relative;
+  box-shadow: none !important;
+}
+
+.accordion-button:active,
+.accordion-button:focus {
+  border: none !important;
+  background-color: var(--my-pink);
+}
+
+.accordion-button:hover {
+  background: var(--my-pink) !important;
+}
+
+:root {
+  --my-pink: #d28383;
+  --fantasy: #fbf3f3;
+  --rose-fog: #e7bcbc;
+  --rose-fog: #e1acac;
+  --oyster-pink: #eccccc;
+  --oyster-pink: #ecd4d4;
+  --vanilla-ice: #f4dcdc;
+  --dawn-pink: #f4e4e4;
+  --vanilla-ice: #f4d4d4;
+}
