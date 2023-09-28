@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Accordion Example</title>
+    <title>Zenify</title>
+    <style>
+      .custombutton:hover {
+        color: #fff;
+        background-color: #9f1849;
+      }
+    </style>
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
     />
     <link rel="stylesheet" href="styles.css" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script
-      src="https://kit.fontawesome.com/a076d05399.js"
-      crossorigin="anonymous"
-    ></script>
 
     <link
       rel="stylesheet"
@@ -24,11 +26,17 @@
       href="https://fonts.googleapis.com/css2?family=Lato:ital@0;1&display=swap"
       rel="stylesheet"
     />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
   </head>
 
   <body>
-    <!-------------Navbar---------------->
-    <nav class="navbar navbar-expand-lg" style="background-color: #fdf7f7">
+    <!---------------------------Navbar-------------------------------------------->
+    <nav class="navbar navbar-expand-lg" style="background-color: #d28383">
       <div class="container-fluid">
         <a class="navbar-brand" href="index.html">
           <!-- <video
@@ -60,39 +68,178 @@
         >
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link" href="#about" style="color: #6a0c2e"
+              <a class="nav-link" href="#about" style="color: #f4e4e4"
                 >About Us</a
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#resource" style="color: #6a0c2e"
+              <a class="nav-link" href="#resource" style="color: #f4e4e4"
                 >Serenity Soundscapes</a
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#contact" style="color: #6a0c2e"
+              <a class="nav-link" href="#contact" style="color: #f4e4e4"
                 >Contact Us</a
               >
             </li>
           </ul>
-          <button class="joinus btn ml-2">Join Us</button>
+
+          <button
+            class="custombutton btn ml-2"
+            style="
+              color: #d28383;
+              background-color: #f4e4e4;
+              border: 2px solid #f4e4e4;
+              margin-right: 10px;
+            "
+            onclick="window.location.href = 'SignUp.html';"
+          >
+            Join Us
+          </button>
         </div>
       </div>
     </nav>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-      crossorigin="anonymous"
-    />
 
-    <!------------Caraousal ------------>
-    <!-- Cards -->
+    <!--------------------------------Caraousal starts-------------------------------------->
+    <style>
+      body {
+        background-color: #fffaf4;
+      }
+
+      .carousel-inner img {
+        margin: 40px auto 0;
+        max-width: 60%;
+        height: auto;
+      }
+    </style>
+    <div id="carouselExampleDark" class="carousel carousel-dark slide">
+      <div class="carousel-indicators">
+        <button
+          type="button"
+          data-bs-target="#carouselExampleDark"
+          data-bs-slide-to="0"
+          class="active"
+          aria-current="true"
+          aria-label="Slide 1"
+        ></button>
+        <button
+          type="button"
+          data-bs-target="#carouselExampleDark"
+          data-bs-slide-to="1"
+          aria-label="Slide 2"
+        ></button>
+        <button
+          type="button"
+          data-bs-target="#carouselExampleDark"
+          data-bs-slide-to="2"
+          aria-label="Slide 3"
+        ></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active" data-bs-interval="10000">
+          <img src="./Zenify/mighty1.png" class="d-block w-100" alt="..." />
+          <div class="carousel-caption d-none d-md-block"></div>
+        </div>
+        <div class="carousel-item" data-bs-interval="2000">
+          <img src="./Zenify/mighty2.png" class="d-block w-100" alt="..." />
+          <div class="carousel-caption d-none d-md-block"></div>
+        </div>
+        <div class="carousel-item">
+          <img src="./Zenify/mighty3.png" class="d-block w-100" alt="..." />
+          <div class="carousel-caption d-none d-md-block"></div>
+        </div>
+      </div>
+      <button
+        class="carousel-control-prev"
+        type="button"
+        data-bs-target="#carouselExampleDark"
+        data-bs-slide="prev"
+      >
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button
+        class="carousel-control-next"
+        type="button"
+        data-bs-target="#carouselExampleDark"
+        data-bs-slide="next"
+      >
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+
+    <!---------------------------------------carousel ends---------------------------------->
+
+    <!-------------------------------Emoji Container------------------------------------------>
+    <!-- <div class="container mt-5">
+      <h1>How I'm Feeling Today</h1>
+      <div class="emoji-card">
+        <button class="btn emoji-button">
+          <span class="emoji">&#x1F62C;</span>
+        </button>
+        <button class="btn emoji-button">
+          <span class="emoji">&#x1F604;</span>
+        </button>
+        <button class="btn emoji-button">
+          <span class="emoji">&#x1F60A;</span>
+        </button>
+
+        <button class="btn emoji-button">
+          <span class="emoji">&#x1F610;</span>
+        </button>
+
+        <button class="btn emoji-button">
+          <span class="emoji">&#x1F61E;</span>
+        </button>
+      </div>
+    </div> -->
+
+    <div class="container mt-5">
+      <h1>How I'm Feeling Today</h1>
+
+      <div class="emoji-card">
+        <a href="excited.html" class="btn emoji-button" target="_blank"
+          ><span class="emoji">&#x1F62C;</span></a
+        >
+
+        <a href="happy.html" class="btn emoji-button" target="_blank"
+          ><span class="emoji">&#x1F604;</span></a
+        >
+
+        <a href="neutral.html" class="btn emoji-button" target="_blank"
+          ><span class="emoji">&#x1F60A;</span></a
+        >
+
+        <a href="sad.html" class="btn emoji-button" target="_blank">
+          <span class="emoji">&#x1F610;</span></a
+        >
+
+        <a href="depressed.html" class="btn emoji-button" target="_blank"
+          ><span class="emoji">&#x1F61E;</span></a
+        >
+      </div>
+    </div>
+    <!-------------------------------Emoji Ends Container------------------------------------------>
+
+    <!-- -----------------------------------Cards-------------------------------------------------->
+
+    <style>
+      .container {
+        /*margin-top: 4rem;*/
+      }
+
+      .container h1 {
+        font-family: "Lato", sans-serif;
+        color: #d28383;
+        font-size: 2.5rem;
+      }
+    </style>
     <div class="container label-heading">
       <div class="row">
         <div class="col-12 text-center">
           <h1 class="display-4">
-            Zenify connects you to mental health support.
+            Zenify connects you to mental health support
           </h1>
         </div>
       </div>
@@ -100,12 +247,16 @@
     <div class="container">
       <div class="row">
         <div class="col-md-4">
-          <div class="card" style="background-color: #eaf9fb">
+          <div class="card" style="background-color: #eaf9fb; color: #000">
             <div class="card-body text-center" style="padding-bottom: 0px">
               <h5 class="card-title">
-                <a class="cardt" href="#">Try Our Online Quiz</a>
+                <a class="cardt" href="#" style="color: #d28383"
+                  >Try Our Online Quiz</a
+                >
               </h5>
-              <p class="card-text">Find the services that are right for you.</p>
+              <p class="card-text" style="color: #000">
+                Find the services that are right for you. Remove me please.
+              </p>
 
               <img
                 src="./Zenify/placeholderimg1.png"
@@ -116,10 +267,12 @@
           </div>
         </div>
         <div class="col-md-4">
-          <div class="card" style="background-color: #fff7e6">
+          <div class="card" style="background-color: #fff7e6; color: #000">
             <div class="card-body" style="padding-bottom: 0px">
               <h5 class="card-title">
-                <a class="cardt" href="#">Call 1800 595 212</a>
+                <a class="cardt" href="#" style="color: #d28383"
+                  >Call 1800 595 212</a
+                >
               </h5>
               <p class="card-text">
                 Make a free call for mental health guidance and advice.
@@ -133,10 +286,12 @@
           </div>
         </div>
         <div class="col-md-4">
-          <div class="card" style="background-color: #efeafb">
+          <div class="card" style="background-color: #efeafb; color: #000">
             <div class="card-body" style="padding-bottom: 0px">
               <h5 class="card-title">
-                <a class="cardt" href="#">Visit in Person</a>
+                <a class="cardt" href="#" style="color: #d28383"
+                  >Visit in Person</a
+                >
               </h5>
               <p class="card-text">
                 A safe and welcoming space for information and support.
@@ -145,6 +300,8 @@
                 src="./Zenify/placeholderimg3.png"
                 class="card-img-top"
                 alt="Card Image 3"
+                width="150px"
+                height="126px"
               />
             </div>
           </div>
@@ -152,7 +309,7 @@
       </div>
     </div>
 
-    <!-----Landing page : Accordian-->
+    <!---------------------------------------Landing page : Accordian------------------------------------------->
 
     <div class="accordion" id="accordionExample">
       <div class="accordion-item">
@@ -303,39 +460,83 @@
       </div>
     </div>
 
-    <!-----------Emotions tracker------------>
-    <div class="container mt-5">
-      <h1>How I'm Feeling Today</h1>
-      <div class="emoji-card">
-        <button class="btn emoji-button">
-          <span class="emoji">&#x1F62C;</span>
-        </button>
-        <button class="btn emoji-button">
-          <span class="emoji">&#x1F604;</span>
-        </button>
-        <button class="btn emoji-button">
-          <span class="emoji">&#x1F60A;</span>
-        </button>
+    <!---------------------------------------Landing page : Accordian Ends Here ---------------------------------->
 
-        <button class="btn emoji-button">
-          <span class="emoji">&#x1F610;</span>
-        </button>
-
-        <button class="btn emoji-button">
-          <span class="emoji">&#x1F61E;</span>
-        </button>
+    <!-------------------------------------------Footer starts ------------------------------------------>
+    <footer class="footer">
+      <div class="container">
+        <div class="row footer-content">
+          <div class="col-md-3 mb-4">
+            <h5 class="text-uppercase">Company</h5>
+            <ul class="list-unstyled">
+              <li><a href="#" style="text-decoration: none">Who we are</a></li>
+              <li><a href="#" style="text-decoration: none">Our Team</a></li>
+              <li>
+                <a href="#" style="text-decoration: none">Jobs & Internships</a>
+              </li>
+              <li>
+                <a href="#" style="text-decoration: none"
+                  >Our Practices and Principles</a
+                >
+              </li>
+              <li><a href="#" style="text-decoration: none">Help</a></li>
+              <li>
+                <a href="#" style="text-decoration: none">Cookie Notice</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-3 mb-4">
+            <h5 class="text-uppercase">Quick Links</h5>
+            <ul class="list-unstyled">
+              <li><a href="#" style="text-decoration: none">Home</a></li>
+              <li><a href="#" style="text-decoration: none">About</a></li>
+              <li><a href="#" style="text-decoration: none">Services</a></li>
+              <li><a href="#" style="text-decoration: none">Contact</a></li>
+            </ul>
+          </div>
+          <div class="col-md-3">
+            <h5 class="text-uppercase">Follow Us</h5>
+            <ul class="list-unstyled social-icons">
+              <li>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+              </li>
+              <li>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+              </li>
+              <li>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
-    </div>
+      <!-- Add the logo here -->
+      <div class="foot">
+        <div class="text-center">
+          <img src="./Zenify/zenify.png" alt="Your Logo" class="footer-logo" />
+        </div>
+        <div class="bg">
+          <div class="container text-center">
+            <p class="rights">© 2023 Zenify. All rights reserved.</p>
+          </div>
+        </div>
+      </div>
+    </footer>
 
     <!-- Bootstrap JavaScript and custom script -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/js/all.min.js"></script>
 
-    <!-- Optional JavaScript; choose one of the two! -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://kit.fontawesome.com/a076d05399.js"
       crossorigin="anonymous"
     ></script>
   </body>

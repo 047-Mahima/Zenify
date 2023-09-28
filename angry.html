@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Angry Emoji Questionnaire</title>
+
+    <!-- Include Bootstrap CSS from a CDN -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --my-pink: #d28383;
+        --fantasy: #fbf3f3;
+        --rose-fog: #e7bcbc;
+        --oyster-pink: #eccccc;
+        --oyster-pink: #ecd4d4;
+        --vanilla-ice: #f4dcdc;
+        --dawn-pink: #f4e4e4;
+        --vanilla-ice: #f4d4d4;
+      }
+
+      body {
+        font-family: "Lato", sans-serif;
+        font-size: 0.5rem;
+      }
+
+      .btn {
+        background-color: #d28383;
+        color: var(--fantasy);
+        width: 100%; /* Make the button take the full width of the container */
+        margin-top: 1rem; /* Add some space between the form and the button */
+      }
+
+      /* Adjust the width and height of the card for the form */
+      .card {
+        max-width: 400px; /* Adjust the maximum width to your liking */
+        margin: 0 auto;
+        padding: 20px; /* Add padding for a more balanced look */
+      }
+
+      /* Style the input when it's focused */
+      input#angryReason:focus,
+      input#angrySituation:focus,
+      input#expressAnger:focus,
+      input#handleSituation:focus {
+        border-color: var(
+          --my-pink
+        ) !important; /* Change border color to your custom color */
+        box-shadow: none !important; /* Remove the default box shadow */
+      }
+
+      .btn:hover {
+        background-color: var(--rose-fog);
+        color: var(--fantasy);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container mt-2">
+      <h6 style="color: var(--my-pink); text-align: center">
+        We agree, life is not fair sometimes :/
+      </h6>
+      <div class="card">
+        <div
+          class="card-header"
+          style="
+            background-color: var(--my-pink);
+            color: #fff;
+            text-align: center;
+          "
+        >
+          <h6>Take a deep breath & pour your heart out</h6>
+        </div>
+        <div class="card-body">
+          <form>
+            <div class="mb-3">
+              <label
+                for="angryReason"
+                class="form-label"
+                style="color: var(--my-pink)"
+              >
+                <span>1. What made you feel angry today?</span>
+              </label>
+              <input type="text" class="form-control" id="angryReason" />
+            </div>
+            <div class="mb-3">
+              <label
+                for="angrySituation"
+                class="form-label"
+                style="color: var(--my-pink)"
+              >
+                2. Can you describe the situation that triggered your anger?
+              </label>
+              <input type="text" class="form-control" id="angrySituation" />
+            </div>
+            <div class="mb-3">
+              <label
+                for="expressAnger"
+                class="form-label"
+                style="color: var(--my-pink)"
+              >
+                3. Did you express your anger or keep it to yourself?
+              </label>
+              <input type="text" class="form-control" id="expressAnger" />
+            </div>
+            <div class="mb-3">
+              <label
+                for="handleSituation"
+                class="form-label"
+                style="color: var(--my-pink)"
+              >
+                4. How would you like to handle similar situations in the
+                future?
+              </label>
+              <input type="text" class="form-control" id="handleSituation" />
+            </div>
+
+            <!-- Add a Submit Button -->
+            <button type="submit" class="btn">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

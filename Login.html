@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Responsive Login Form Using Bootstrap 5</title>
+    <!-- Bootstrap 5 CDN Link -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <section class="wrapper">
+      <div class="container">
+        <div
+          class="col-sm-8 offset-sm-2 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4 text-center"
+        >
+          <form class="rounded shadow p-5" style="background-color: #ebd4dd">
+            <!-- Small and rounded logo -->
+            <img
+              decoding="async"
+              src="./Zenify/zenify.png"
+              class="img-fluid rounded-circle mb-4"
+              alt="logo"
+              style="max-width: 80%"
+            />
+
+            <h3 class="text-dark fw-bolder fs-4 mb-2">Sign In to ZENIFY</h3>
+            <div class="fw-normal text-muted mb-4">
+              New Here?
+              <a
+                href="SignUp.html"
+                class="text-decoration-none fw-bold"
+                style="color: #d28383"
+                >Create an Account</a
+              >
+            </div>
+            <div class="form-floating mb-3">
+              <input
+                type="email"
+                class="form-control"
+                id="floatingInput"
+                placeholder="name@example.com"
+              />
+              <label for="floatingInput">Email address</label>
+            </div>
+            <div class="form-floating">
+              <input
+                type="password"
+                class="form-control"
+                id="floatingPassword"
+                placeholder="Password"
+              />
+              <label for="floatingPassword">Password</label>
+            </div>
+            <div class="mt-2 text-end">
+              <a
+                href="#"
+                class="text-decoration-none fw-bold"
+                style="color: #d28383"
+                >Forget Password?</a
+              >
+            </div>
+            <button
+              type="submit"
+              class="btn btn-primary submit_btn w-100 my-4"
+              style="background-color: #d28383"
+            >
+              Continue
+            </button>
+            <div class="text-center text-muted text-uppercase mb-3">or</div>
+            <a
+              href="https://www.google.com/"
+              class="btn btn-light login_with w-100 mb-3"
+            >
+              <img
+                decoding="async"
+                alt="Logo"
+                src="./Zenify/google.svg"
+                class="img-fluid me-3"
+                style="max-width: 8%"
+              />
+              Continue with Google
+            </a>
+            <a
+              href="https://www.facebook.com/"
+              class="btn btn-light login_with w-100 mb-3"
+            >
+              <img
+                decoding="async"
+                alt="Logo"
+                src="./Zenify/facebook.svg"
+                class="img-fluid me-3"
+                style="max-width: 8%"
+              />
+              Continue with Facebook
+            </a>
+            <a
+              href="https://www.linkedin.com/login"
+              class="btn btn-light login_with w-100 mb-3"
+            >
+              <img
+                decoding="async"
+                alt="Logo"
+                src="./Zenify/linkedin.svg"
+                class="img-fluid me-3"
+                style="max-width: 8%"
+              />
+              Continue with Linkedin
+            </a>
+          </form>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
