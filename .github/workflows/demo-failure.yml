@@ -1,0 +1,10 @@
+name: Demo failure
+on: push
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Running tests..."
+      - run: |
+          echo "TypeError: unsupported operand type(s) for +: 'int' and 'str'"
+          exit 1
