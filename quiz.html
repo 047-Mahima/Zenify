@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wellness Quiz — Zenify</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── Tokens ─────────────────────────────────────────────────────────────── */
+    :root {
+      --pink:    #d28383;
+      --pink-dk: #b86b6b;
+      --fog:     #e1acac;
+      --blush:   #fde8e8;
+      --dust:    #eedcdc;
+      --bg:      #fffaf4;
+      --card:    #ffffff;
+      --ink:     #3d2020;
+      --muted:   #9a7a7a;
+      --cream:   #fbf3f3;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Lato", sans-serif;
+      background: var(--bg);
+      min-height: 100vh;
+      color: var(--ink);
+    }
+
+    /* ─── Header ─────────────────────────────────────────────────────────────── */
+    .qz-header {
+      background: var(--pink);
+      padding: 0.75rem max(1.5rem, 4vw);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .qz-header img { height: 52px; }
+    .qz-header span { color: rgba(255,255,255,0.85); font-size: 0.85rem; letter-spacing: 0.04em; }
+
+    /* ─── Wrapper ────────────────────────────────────────────────────────────── */
+    .qz-wrap {
+      max-width: 620px;
+      margin: 0 auto;
+      padding: 2.5rem max(1.25rem, 4vw);
+    }
+
+    /* ─── Progress ───────────────────────────────────────────────────────────── */
+    .progress-bar {
+      height: 6px;
+      background: var(--dust);
+      border-radius: 99px;
+      overflow: hidden;
+      margin-bottom: 0.5rem;
+    }
+    .progress-fill {
+      height: 100%;
+      background: var(--pink);
+      border-radius: 99px;
+      transition: width 0.4s cubic-bezier(.4,0,.2,1);
+    }
+    .progress-label {
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-align: right;
+      margin-bottom: 2rem;
+    }
+
+    /* ─── Slide animation ────────────────────────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .q-card { animation: fadeUp 0.38s ease both; }
+
+    /* ─── Question text ──────────────────────────────────────────────────────── */
+    .q-text {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(1.2rem, 3.5vw, 1.5rem);
+      line-height: 1.5;
+      color: var(--ink);
+      margin-bottom: 1.75rem;
+      text-wrap: balance;
+    }
+
+    /* ─── Options ────────────────────────────────────────────────────────────── */
+    .opt {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.25rem;
+      margin-bottom: 0.7rem;
+      border: 2px solid var(--dust);
+      border-radius: 14px;
+      background: var(--card);
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s, transform 0.15s;
+    }
+    .opt:hover {
+      border-color: var(--pink);
+      background: var(--cream);
+      transform: translateX(5px);
+    }
+    .opt.sel {
+      border-color: var(--pink);
+      background: var(--blush);
+    }
+    .opt-letter {
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      background: var(--dust);
+      color: var(--pink);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 0.82rem;
+      flex-shrink: 0;
+      transition: background 0.15s, color 0.15s;
+    }
+    .opt.sel .opt-letter {
+      background: var(--pink);
+      color: #fff;
+    }
+    .opt-text { font-size: 0.94rem; color: var(--ink); line-height: 1.45; }
+
+    /* ─── Nav buttons ────────────────────────────────────────────────────────── */
+    .qz-nav { display: flex; gap: 0.75rem; margin-top: 1.75rem; }
+    .btn-next {
+      flex: 1; padding: 0.7rem 1.5rem;
+      background: var(--pink); color: #fff;
+      border: none; border-radius: 50px;
+      font: 700 0.95rem "Lato", sans-serif;
+      cursor: pointer; transition: background 0.15s;
+    }
+    .btn-next:hover:not(:disabled) { background: var(--pink-dk); }
+    .btn-next:disabled { background: var(--dust); color: var(--muted); cursor: not-allowed; }
+    .btn-back {
+      padding: 0.7rem 1.5rem;
+      background: transparent; color: var(--muted);
+      border: 2px solid var(--dust); border-radius: 50px;
+      font: 700 0.95rem "Lato", sans-serif;
+      cursor: pointer; transition: border-color 0.15s, color 0.15s;
+    }
+    .btn-back:hover { border-color: var(--pink); color: var(--pink); }
+
+    /* ─── Intro card ─────────────────────────────────────────────────────────── */
+    .intro-card {
+      text-align: center; padding: 2.5rem 2rem;
+      background: var(--card);
+      border-radius: 22px;
+      box-shadow: 0 6px 40px rgba(210,131,131,0.12);
+      animation: fadeUp 0.4s ease;
+    }
+    .intro-icon { font-size: 3.5rem; margin-bottom: 1rem; }
+    .intro-card h1 {
+      font-family: "Playfair Display", serif;
+      font-size: 2rem; color: var(--ink);
+      margin-bottom: 0.75rem;
+    }
+    .intro-card p {
+      color: var(--muted); font-size: 0.97rem;
+      line-height: 1.7; max-width: 420px;
+      margin: 0 auto 1.5rem;
+    }
+    .pills { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem; margin-bottom: 2rem; }
+    .pill {
+      background: var(--cream); border: 1px solid var(--dust);
+      color: var(--muted); font-size: 0.78rem;
+      padding: 0.3rem 0.9rem; border-radius: 20px;
+    }
+    .btn-start {
+      display: inline-block; padding: 0.75rem 2.5rem;
+      background: var(--pink); color: #fff;
+      border: none; border-radius: 50px;
+      font: 700 1rem "Lato", sans-serif;
+      cursor: pointer; transition: background 0.15s;
+      margin-bottom: 1.25rem;
+    }
+    .btn-start:hover { background: var(--pink-dk); }
+    .back-link { color: var(--muted); font-size: 0.84rem; text-decoration: none; }
+    .back-link:hover { color: var(--pink); }
+
+    /* ─── Result card ────────────────────────────────────────────────────────── */
+    .result-card {
+      text-align: center; padding: 2.5rem 2rem;
+      background: var(--card);
+      border-radius: 22px;
+      box-shadow: 0 6px 40px rgba(210,131,131,0.15);
+      animation: fadeUp 0.45s ease;
+    }
+    .result-emoji { font-size: 4rem; margin-bottom: 0.75rem; }
+    .result-title {
+      font-family: "Playfair Display", serif;
+      font-size: 2.2rem; color: var(--ink);
+      margin-bottom: 0.6rem;
+    }
+    .score-badge {
+      display: inline-block;
+      background: var(--cream); border: 2px solid var(--dust);
+      color: var(--pink); font-weight: 700;
+      padding: 0.35rem 1.25rem; border-radius: 50px;
+      font-size: 0.88rem; margin-bottom: 1.25rem;
+    }
+    .result-msg {
+      font-size: 0.97rem; color: #7a5a5a;
+      line-height: 1.75; max-width: 460px;
+      margin: 0 auto 1.5rem;
+    }
+    .next-steps {
+      background: var(--cream);
+      border-radius: 14px; padding: 1.25rem 1.5rem;
+      text-align: left; margin-bottom: 1.75rem;
+    }
+    .next-steps h6 {
+      color: var(--pink); font-weight: 700;
+      margin-bottom: 0.75rem; font-size: 0.9rem;
+      text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .next-steps ul { list-style: none; padding: 0; margin: 0; }
+    .next-steps li {
+      font-size: 0.9rem; color: #7a5a5a;
+      padding: 0.35rem 0 0.35rem 1.2rem;
+      position: relative;
+    }
+    .next-steps li::before { content: "✦"; color: var(--pink); position: absolute; left: 0; font-size: 0.6rem; top: 0.55rem; }
+    .result-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; margin-bottom: 1.25rem; }
+    .btn-outline {
+      padding: 0.65rem 1.75rem;
+      background: transparent; color: var(--pink);
+      border: 2px solid var(--pink); border-radius: 50px;
+      font: 700 0.93rem "Lato", sans-serif;
+      cursor: pointer; transition: all 0.15s;
+      text-decoration: none; display: inline-block;
+    }
+    .btn-outline:hover { background: var(--pink); color: #fff; }
+    .btn-solid {
+      padding: 0.65rem 1.75rem;
+      background: var(--pink); color: #fff;
+      border: none; border-radius: 50px;
+      font: 700 0.93rem "Lato", sans-serif;
+      cursor: pointer; transition: background 0.15s;
+      text-decoration: none; display: inline-block;
+    }
+    .btn-solid:hover { background: var(--pink-dk); color: #fff; }
+    .disclaimer { font-size: 0.74rem; color: #c4a0a0; line-height: 1.6; }
+
+    /* ─── Responsive ─────────────────────────────────────────────────────────── */
+    @media (max-width: 420px) {
+      .intro-card, .result-card { padding: 2rem 1.25rem; }
+      .result-actions { flex-direction: column; }
+      .btn-outline, .btn-solid { width: 100%; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="qz-header">
+  <a href="index.html"><img src="./Zenify/Zenify-logo.gif" alt="Zenify" /></a>
+  <span>Wellness Check-In</span>
+</header>
+
+<div class="qz-wrap">
+  <div id="qz"></div>
+</div>
+
+<script>
+const Qs = [
+  {
+    text: "How would you rate your overall mood this week?",
+    opts: [
+      "Bright and positive — I'm genuinely enjoying life",
+      "Mostly okay, with some ups and downs",
+      "Mostly low, finding it hard to feel joy",
+      "Very low — I'm struggling significantly"
+    ]
+  },
+  {
+    text: "How well have you been sleeping lately?",
+    opts: [
+      "Sleeping well and waking up rested",
+      "Some nights are good, others not so great",
+      "Frequently waking up or struggling to fall asleep",
+      "Very poor sleep — exhausted most of the time"
+    ]
+  },
+  {
+    text: "How often have you felt overwhelmed or anxious recently?",
+    opts: [
+      "Rarely — I feel calm and in control",
+      "Occasionally, but I manage well",
+      "Often — small things feel very big right now",
+      "Almost constantly — it's hard to cope"
+    ]
+  },
+  {
+    text: "How connected do you feel to people around you?",
+    opts: [
+      "Very connected — I feel supported and loved",
+      "Reasonably connected — I have some good relationships",
+      "A little isolated — I wish I had more support",
+      "Very isolated — I feel alone most of the time"
+    ]
+  },
+  {
+    text: "How well are you managing your daily responsibilities?",
+    opts: [
+      "Handling everything with relative ease",
+      "Getting through, even if it's sometimes tough",
+      "Struggling to keep up with basic tasks",
+      "Finding it very difficult to function day-to-day"
+    ]
+  },
+  {
+    text: "How often do you make time for activities you enjoy?",
+    opts: [
+      "Regularly — self-care is a real priority for me",
+      "Sometimes, when I can find the time",
+      "Rarely — I've lost interest in most things",
+      "Almost never — nothing feels enjoyable right now"
+    ]
+  },
+  {
+    text: "How are your energy levels and physical wellbeing?",
+    opts: [
+      "Great — I feel energised and physically well",
+      "Okay — some minor tiredness or tension",
+      "Often fatigued, tense, or not eating well",
+      "Very poor physical wellbeing most days"
+    ]
+  },
+  {
+    text: "How hopeful do you feel about the future?",
+    opts: [
+      "Very hopeful — I'm genuinely looking forward to what's ahead",
+      "Cautiously optimistic",
+      "Uncertain — the future feels unclear or worrying",
+      "Very little hope — it's hard to see things improving"
+    ]
+  }
+];
+
+const TIERS = [
+  {
+    min: 25, emoji: "🌸", title: "You're Thriving",
+    msg: "Your responses suggest you're in a genuinely good place right now. You're managing life well, staying connected, and finding real joy. Keep nurturing the habits and relationships that are working for you.",
+    steps: [
+      "Continue daily journaling to track what's going well",
+      "Share your positivity — connection lifts others too",
+      "Set a new personal goal to channel your good energy",
+      "Explore our Soundscapes page for a daily mindful moment"
+    ]
+  },
+  {
+    min: 17, emoji: "🌿", title: "You're Navigating",
+    msg: "You're doing okay — some days are better than others, and that's completely normal. There are things working in your life, and a few areas where a little extra care might help you feel more balanced.",
+    steps: [
+      "Try a daily 5-minute journal entry — even just a few lines",
+      "Use our Soundscapes page for a wind-down ritual",
+      "Beyond Blue (1300 22 4636) offers free guidance",
+      "Explore our resources page for grounding techniques"
+    ]
+  },
+  {
+    min: 0, emoji: "💙", title: "Reach Out for Support",
+    msg: "It sounds like things have been difficult lately. Please know you don't have to go through this alone. Reaching out — to a friend, a professional, or a helpline — can make a real difference.",
+    steps: [
+      "Lifeline 24/7 crisis support: 13 11 14",
+      "Beyond Blue: 1300 22 4636",
+      "Talk to your GP about a Mental Health Care Plan",
+      "Check our Resources page for more support options"
+    ]
+  }
+];
+
+const L = ['A','B','C','D'];
+let cur = -1;
+let ans = new Array(Qs.length).fill(null);
+
+function pts(qi, oi) { return 4 - oi; }
+
+function render() {
+  const el = document.getElementById('qz');
+  if (cur === -1) { el.innerHTML = intro(); return; }
+  if (cur === Qs.length) { el.innerHTML = result(); return; }
+
+  const pct = Math.round((cur / Qs.length) * 100);
+  const q = Qs[cur];
+
+  el.innerHTML = `
+    <div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>
+    <div class="progress-label">Question ${cur + 1} of ${Qs.length}</div>
+    <div class="q-card">
+      <p class="q-text">${q.text}</p>
+      ${q.opts.map((o, i) => `
+        <div class="opt ${ans[cur] === i ? 'sel' : ''}" onclick="pick(${i})">
+          <span class="opt-letter">${L[i]}</span>
+          <span class="opt-text">${o}</span>
+        </div>
+      `).join('')}
+      <div class="qz-nav">
+        ${cur > 0 ? `<button class="btn-back" onclick="back()">← Back</button>` : '<span></span>'}
+        <button class="btn-next" onclick="next()" ${ans[cur] === null ? 'disabled' : ''}>
+          ${cur === Qs.length - 1 ? 'See My Results ✦' : 'Next →'}
+        </button>
+      </div>
+    </div>`;
+}
+
+function intro() {
+  return `
+    <div class="intro-card">
+      <div class="intro-icon">🧘</div>
+      <h1>Wellness Check-In</h1>
+      <p>A gentle 2-minute check-in to see how you're really doing. This is not a clinical assessment — just a quiet moment to tune in with yourself.</p>
+      <div class="pills">
+        <span class="pill">8 questions</span>
+        <span class="pill">~2 minutes</span>
+        <span class="pill">Private &amp; anonymous</span>
+      </div>
+      <button class="btn-start" onclick="start()">Begin Check-In</button><br>
+      <a href="index.html" class="back-link">← Back to home</a>
+    </div>`;
+}
+
+function result() {
+  const score = ans.reduce((s, a, qi) => s + (a !== null ? pts(qi, a) : 0), 0);
+  const tier = TIERS.find(t => score >= t.min);
+  return `
+    <div class="result-card">
+      <div class="result-emoji">${tier.emoji}</div>
+      <h2 class="result-title">${tier.title}</h2>
+      <span class="score-badge">Your score: ${score} / 32</span>
+      <p class="result-msg">${tier.msg}</p>
+      <div class="next-steps">
+        <h6>Suggested next steps</h6>
+        <ul>${tier.steps.map(s => `<li>${s}</li>`).join('')}</ul>
+      </div>
+      <div class="result-actions">
+        <button class="btn-outline" onclick="restart()">Take quiz again</button>
+        <a href="resource.html" class="btn-solid">View Resources</a>
+        <a href="index.html" class="btn-solid">Back to home</a>
+      </div>
+      <p class="disclaimer">This quiz is not a diagnostic tool. If you're struggling, please reach out to a qualified healthcare professional.</p>
+    </div>`;
+}
+
+function pick(i) { ans[cur] = i; render(); }
+function next() { if (ans[cur] === null) return; cur++; render(); }
+function back() { if (cur > 0) { cur--; render(); } }
+function start() { cur = 0; render(); }
+function restart() { ans = new Array(Qs.length).fill(null); cur = 0; render(); }
+
+render();
+</script>
+</body>
+</html>

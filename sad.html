@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sad — Zenify Journal</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital@0;1&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="journal.css" />
+  </head>
+  <body data-mood="sad">
+    <div class="container mt-4">
+      <p class="page-subtitle">Navigating through the blues today</p>
+      <div class="card journal-card">
+        <div class="card-header">
+          <h6 class="mb-0">Express your sadness and let it become a stepping stone to healing</h6>
+        </div>
+        <div class="card-body">
+          <form id="journalForm" novalidate>
+            <div class="mb-3">
+              <label for="sadCause" class="form-label">1. What is causing you to feel sad today?</label>
+              <input type="text" class="form-control" id="sadCause" name="sadCause" required />
+              <div class="invalid-feedback">Please fill in this field.</div>
+            </div>
+            <div class="mb-3">
+              <label for="sadSituation" class="form-label">2. Can you describe the situation or reason that has left you feeling down?</label>
+              <input type="text" class="form-control" id="sadSituation" name="sadSituation" required />
+              <div class="invalid-feedback">Please fill in this field.</div>
+            </div>
+            <div class="mb-3">
+              <label for="sadCoping" class="form-label">3. How do you usually cope with sadness when it overwhelms you?</label>
+              <input type="text" class="form-control" id="sadCoping" name="sadCoping" required />
+              <div class="invalid-feedback">Please fill in this field.</div>
+            </div>
+            <div class="mb-3">
+              <label for="sadSupport" class="form-label">4. Is there someone you turn to when you need comfort during sad times?</label>
+              <input type="text" class="form-control" id="sadSupport" name="sadSupport" required />
+              <div class="invalid-feedback">Please fill in this field.</div>
+            </div>
+            <button type="submit" class="btn-journal">Save Entry</button>
+          </form>
+        </div>
+      </div>
+      <a href="index.html" class="back-link">&#8592; Back to home</a>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="journal.js"></script>
+  </body>
+</html>

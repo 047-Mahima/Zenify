@@ -1,0 +1,224 @@
+/* ─── Design tokens ─────────────────────────────────────────────────────────── */
+:root {
+  --my-pink:     #d28383;
+  --rose-fog:    #e1acac;
+  --oyster-pink: #ecd4d4;
+  --vanilla-ice: #f4d4d4;
+  --dawn-pink:   #f4e4e4;
+  --fantasy:     #fbf3f3;
+  --page-bg:     #fffaf4;
+}
+
+/* ─── Base ───────────────────────────────────────────────────────────────────── */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Lato", sans-serif;
+  background-color: var(--page-bg);
+}
+
+p {
+  font-size: 0.875rem;
+  padding: 10px;
+}
+
+/* ─── Navbar ─────────────────────────────────────────────────────────────────── */
+.navbar {
+  padding: 0;
+}
+
+.navbar-brand {
+  padding: 0;
+}
+
+.navbar-brand img {
+  border-radius: 50%;
+  margin: 0;
+  height: 90px;
+  width: 230px;
+}
+
+.custombutton:hover {
+  color: #fff;
+  background-color: #9f1849;
+}
+
+/* ─── Emoji tracker ──────────────────────────────────────────────────────────── */
+h1 {
+  text-align: center;
+  margin-bottom: 1rem;
+  color: var(--rose-fog);
+  font-size: 1rem;
+  font-family: "Lato", sans-serif;
+  text-shadow: 1px 1px 1px #e4cfcf;
+}
+
+.emoji-card {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 1rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.emoji-button {
+  font-size: 1rem;
+  border: 2px solid transparent;
+  transition: transform 0.2s, background-color 0.2s, border-color 0.2s;
+}
+
+.emoji-button:hover {
+  background-color: var(--oyster-pink);
+  border-color: var(--rose-fog);
+  transform: scale(1.1);
+}
+
+.emoji-button:focus {
+  background-color: var(--oyster-pink);
+  outline: none;
+}
+
+.emoji {
+  font-size: 1.5rem;
+}
+
+/* ─── Carousel ───────────────────────────────────────────────────────────────── */
+.carousel-inner img {
+  margin: 40px auto 0;
+  max-width: 60%;
+  height: auto;
+}
+
+/* ─── Cards (landing page) ───────────────────────────────────────────────────── */
+.card {
+  color: #000;
+}
+
+.card-img-top {
+  width: 150px;
+  height: auto;
+}
+
+.card-body {
+  text-align: center;
+  min-height: 250px;
+}
+
+/* ─── Accordion ──────────────────────────────────────────────────────────────── */
+.accordion {
+  max-width: 600px;
+  margin: 50px auto;
+  box-shadow: 0 2px 25px 0 var(--oyster-pink);
+}
+
+.accordion-button {
+  background-color: var(--rose-fog) !important;
+  color: #fff !important;
+  position: relative;
+  box-shadow: none !important;
+}
+
+.accordion-button:active,
+.accordion-button:focus {
+  border: none !important;
+  background-color: var(--my-pink) !important;
+}
+
+.accordion-button:hover {
+  background: var(--my-pink) !important;
+}
+
+.accordion-button:not(.collapsed)::after {
+  background-image: none !important;
+  content: "−";
+  color: var(--fantasy);
+}
+
+.accordion-button.collapsed::after {
+  background-image: none !important;
+  content: "+";
+  color: var(--fantasy);
+}
+
+.accordion-button::after {
+  width: 1rem;
+  text-align: right;
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* ─── Footer ─────────────────────────────────────────────────────────────────── */
+.footer {
+  background-color: var(--vanilla-ice);
+  color: #9f1849;
+  padding: 20px;
+}
+
+.footer-logo {
+  max-width: 100px;
+  border-radius: 50%;
+  margin-left: 70px;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.footer-content h5 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.footer-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-content ul li {
+  margin-bottom: 10px;
+}
+
+.footer-content a {
+  text-decoration: none;
+  color: var(--my-pink);
+  transition: color 0.3s ease;
+}
+
+.footer-content a:hover {
+  color: #9f1849;
+}
+
+.social-icons i {
+  font-size: 24px;
+  margin-right: 10px;
+}
+
+.bg {
+  margin: 0;
+  padding: 10px 0;
+  color: #9f1849;
+}
+
+.foot {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.container {
+  color: #9f1849;
+  max-width: 1200px;
+}

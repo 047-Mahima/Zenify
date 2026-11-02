@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Resources — Zenify</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital@0;1&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      body { font-family: "Lato", sans-serif; background-color: var(--page-bg); }
+      .section-title { color: var(--my-pink); font-size: 1.4rem; font-weight: 700; margin-bottom: 1rem; }
+      .resource-card { border: none; border-radius: 0.75rem; box-shadow: 0 2px 12px rgba(210,131,131,0.15); height: 100%; transition: transform 0.15s; }
+      .resource-card:hover { transform: translateY(-3px); }
+      .resource-card .card-header { font-weight: 600; border-radius: 0.75rem 0.75rem 0 0 !important; }
+      .resource-card .card-body { min-height: auto; }
+      .badge-tag { background-color: var(--oyster-pink); color: #9f1849; font-weight: 500; font-size: 0.75rem; border-radius: 20px; padding: 3px 10px; }
+      .page-header { background-color: var(--my-pink); color: #fff; padding: 2rem 0; text-align: center; margin-bottom: 2rem; }
+      .hotline { font-size: 1.5rem; font-weight: 700; color: #9f1849; }
+    </style>
+  </head>
+  <body>
+    <div class="page-header">
+      <h1 class="mb-1">Mental Health Resources</h1>
+      <p class="mb-0" style="opacity:0.9">You are not alone. Help is always available.</p>
+    </div>
+
+    <div class="container pb-5">
+
+      <!-- Crisis Support -->
+      <h2 class="section-title">Crisis Support</h2>
+      <div class="row g-3 mb-5">
+        <div class="col-md-4">
+          <div class="card resource-card">
+            <div class="card-header" style="background-color:#fde8e8">Lifeline Australia</div>
+            <div class="card-body">
+              <p class="card-text">24/7 crisis support, suicide prevention, and mental health support line.</p>
+              <p class="hotline">13 11 14</p>
+              <span class="badge-tag">Crisis</span> <span class="badge-tag">24/7</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card resource-card">
+            <div class="card-header" style="background-color:#fde8e8">Beyond Blue</div>
+            <div class="card-body">
+              <p class="card-text">Support for anxiety, depression, and suicide prevention. Available around the clock.</p>
+              <p class="hotline">1300 22 4636</p>
+              <span class="badge-tag">Anxiety</span> <span class="badge-tag">Depression</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card resource-card">
+            <div class="card-header" style="background-color:#fde8e8">Kids Helpline</div>
+            <div class="card-body">
+              <p class="card-text">Free, private, and confidential 24/7 phone and online counselling for young people aged 5–25.</p>
+              <p class="hotline">1800 55 1800</p>
+              <span class="badge-tag">Youth</span> <span class="badge-tag">24/7</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Anxiety & Stress -->
+      <h2 class="section-title">Anxiety &amp; Stress</h2>
+      <div class="row g-3 mb-5">
+        <div class="col-md-4">
+          <div class="card resource-card">
+            <div class="card-header" style="background-color:#e8f4fd">Box Breathing</div>
+            <div class="card-body">
+              <p class="card-text">Inhale for 4 seconds, hold for 4, exhale for 4, hold for 4. Repeat 4 times. Activates your parasympathetic nervous system to reduce immediate anxiety.</p>
+              <span class="badge-tag">Self-help</span> <span class="badge-tag">Breathing</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card resource-card">
+            <div class="card-header" style="background-color:#e8f4fd">5-4-3-2-1 Grounding</div>
+            <div class="card-body">
+              <p class="card-text">Notice 5 things you see, 4 you can touch, 3 you hear, 2 you smell, and 1 you taste. Brings you back to the present moment during a stress spiral.</p>
+              <span class="badge-tag">Grounding</span> <span class="badge-tag">Mindfulness</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card resource-card">
+            <div class="card-header" style="background-color:#e8f4fd">This Way Up</div>
+            <div class="card-body">
+              <p class="card-text">Structured online programs designed to help you build skills for managing stress and low mood at your own pace.</p>
+              <span class="badge-tag">Online course</span> <span class="badge-tag">Self-paced</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Emotional Wellbeing -->
+      <h2 class="section-title">Emotional Wellbeing</h2>
+      <div class="row g-3 mb-5">
+        <div class="col-md-4">
+          <div class="card resource-card">
+            <div class="card-header" style="background-color:#eef3fb">Behavioural Activation</div>
+            <div class="card-body">
+              <p class="card-text">Schedule one small, enjoyable activity each day. Even brief positive experiences can help shift your mood and build a little momentum.</p>
+              <span class="badge-tag">Self-help</span> <span class="badge-tag">Daily habit</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card resource-card">
+            <div class="card-header" style="background-color:#eef3fb">MoodGym</div>
+            <div class="card-body">
+              <p class="card-text">Free interactive online program with exercises to help you understand your thought patterns and build healthier habits around mood.</p>
+              <span class="badge-tag">Free</span> <span class="badge-tag">Online</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card resource-card">
+            <div class="card-header" style="background-color:#eef3fb">SANE Australia</div>
+            <div class="card-body">
+              <p class="card-text">Support for people living with complex mental health issues. Offers forums, helpline, and resources tailored to long-term conditions.</p>
+              <p class="hotline">1800 187 263</p>
+              <span class="badge-tag">Helpline</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mindfulness & Meditation -->
+      <h2 class="section-title">Mindfulness &amp; Meditation</h2>
+      <div class="row g-3 mb-5">
+        <div class="col-md-4">
+          <div class="card resource-card">
+            <div class="card-header" style="background-color:#edfaf1">Body Scan Meditation</div>
+            <div class="card-body">
+              <p class="card-text">Lie down comfortably and slowly direct your awareness from your feet to the top of your head, releasing tension in each area as you go. Takes 10–20 minutes.</p>
+              <span class="badge-tag">Meditation</span> <span class="badge-tag">Relaxation</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card resource-card">
+            <div class="card-header" style="background-color:#edfaf1">Smiling Mind</div>
+            <div class="card-body">
+              <p class="card-text">Free mindfulness app developed by psychologists and educators. Features programs for all age groups including work, sport, and sleep.</p>
+              <span class="badge-tag">Free App</span> <span class="badge-tag">All Ages</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card resource-card">
+            <div class="card-header" style="background-color:#edfaf1">Gratitude Journaling</div>
+            <div class="card-body">
+              <p class="card-text">Each evening, write three specific things you are grateful for today. Research shows this consistently improves mood and well-being over time.</p>
+              <span class="badge-tag">Journaling</span> <span class="badge-tag">Daily habit</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Self-Care Toolkit -->
+      <h2 class="section-title">Self-Care Toolkit</h2>
+      <div class="row g-3 mb-4">
+        <div class="col-md-4">
+          <div class="card resource-card">
+            <div class="card-header" style="background-color:#fdf6e8">Sleep Hygiene</div>
+            <div class="card-body">
+              <p class="card-text">Go to bed and wake at consistent times. Avoid screens 30 minutes before sleep. Keep your bedroom cool, dark, and quiet. Poor sleep amplifies every mental health challenge.</p>
+              <span class="badge-tag">Sleep</span> <span class="badge-tag">Lifestyle</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card resource-card">
+            <div class="card-header" style="background-color:#fdf6e8">Physical Movement</div>
+            <div class="card-body">
+              <p class="card-text">Even a 20-minute walk increases serotonin and endorphins. You don't need a gym — consistent moderate movement is what matters most for mood.</p>
+              <span class="badge-tag">Exercise</span> <span class="badge-tag">Lifestyle</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card resource-card">
+            <div class="card-header" style="background-color:#fdf6e8">Social Connection</div>
+            <div class="card-body">
+              <p class="card-text">Isolation worsens mental health. Reach out to one person today — a text, a call, or a coffee. Vulnerability builds real connection.</p>
+              <span class="badge-tag">Community</span> <span class="badge-tag">Connection</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center mt-4">
+        <a href="index.html" style="color: var(--my-pink); text-decoration: none; font-size: 0.95rem;">&#8592; Back to home</a>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

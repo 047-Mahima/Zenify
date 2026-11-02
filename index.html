@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zenify — Your Emotions Journal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Lato:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <style>
+    /* ─── Design tokens ──────────────────────────────────────────────────────── */
+    :root {
+      --pink:    #d28383;
+      --pink-dk: #b86b6b;
+      --fog:     #e1acac;
+      --dust:    #eedcdc;
+      --blush:   #fde8e8;
+      --bg:      #fffaf4;
+      --card:    #ffffff;
+      --ink:     #3d2020;
+      --muted:   #9a7a7a;
+      --cream:   #fbf3f3;
+      --vanilla: #f4d4d4;
+      --border:  #eedcdc;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Lato", sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    img { max-width: 100%; display: block; }
+
+    /* ─── NAVBAR ─────────────────────────────────────────────────────────────── */
+    .nav {
+      background: var(--pink);
+      padding: 0 max(1.5rem, 4vw);
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-logo img { height: 62px; }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.75rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: rgba(255,255,255,0.88);
+      text-decoration: none;
+      font-size: 0.88rem;
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: #fff; }
+
+    .nav-cta {
+      background: var(--cream);
+      color: var(--pink) !important;
+      font-weight: 700 !important;
+      padding: 0.45rem 1.3rem;
+      border-radius: 50px;
+      font-size: 0.88rem !important;
+    }
+    .nav-cta:hover { background: #fff !important; }
+
+    .nav-burger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.3rem;
+      gap: 4px;
+      flex-direction: column;
+    }
+    .nav-burger span {
+      display: block;
+      width: 22px; height: 2px;
+      background: #fff;
+      border-radius: 2px;
+      transition: transform 0.2s, opacity 0.2s;
+    }
+
+    .nav-mobile {
+      display: none;
+      position: absolute;
+      top: 72px; left: 0; right: 0;
+      background: var(--pink-dk);
+      padding: 1.5rem max(1.5rem, 4vw);
+      flex-direction: column;
+      gap: 1.25rem;
+      z-index: 99;
+    }
+    .nav-mobile.open { display: flex; }
+    .nav-mobile a {
+      color: rgba(255,255,255,0.9);
+      text-decoration: none;
+      font-size: 1rem;
+    }
+
+    @media (max-width: 720px) {
+      .nav-links { display: none; }
+      .nav-burger { display: flex; }
+    }
+
+    /* ─── HERO ───────────────────────────────────────────────────────────────── */
+    .hero {
+      background: linear-gradient(135deg, #fde8e8 0%, #fff7f0 45%, #fbf3f3 100%);
+      padding: 5rem max(2rem, 6vw);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3.5rem;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "✦";
+      position: absolute;
+      top: 2.5rem; right: 52%;
+      font-size: 1.4rem;
+      color: var(--dust);
+    }
+    .hero::after {
+      content: "✦";
+      position: absolute;
+      bottom: 3rem; left: 50%;
+      font-size: 0.9rem;
+      color: var(--dust);
+      opacity: 0.6;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.73rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--pink);
+      margin-bottom: 1.2rem;
+    }
+
+    .hero h1 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(2.8rem, 5.5vw, 4.4rem);
+      font-weight: 600;
+      line-height: 1.1;
+      color: var(--ink);
+      margin-bottom: 1.25rem;
+      text-wrap: balance;
+    }
+    .hero h1 em { font-style: italic; color: var(--pink); }
+
+    .hero-sub {
+      font-size: 1.03rem;
+      color: var(--muted);
+      line-height: 1.85;
+      max-width: 420px;
+      margin-bottom: 2.25rem;
+    }
+
+    .hero-ctas { display: flex; flex-wrap: wrap; gap: 0.85rem; }
+
+    .btn-primary {
+      background: var(--pink);
+      color: #fff;
+      border: none;
+      padding: 0.78rem 2rem;
+      border-radius: 50px;
+      font: 700 0.97rem "Lato", sans-serif;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.15s;
+      cursor: pointer;
+    }
+    .btn-primary:hover { background: var(--pink-dk); color: #fff; }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--pink);
+      border: 2px solid var(--pink);
+      padding: 0.72rem 1.85rem;
+      border-radius: 50px;
+      font: 700 0.97rem "Lato", sans-serif;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.15s;
+    }
+    .btn-outline:hover { background: var(--pink); color: #fff; }
+
+    .hero-img {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-img img {
+      width: 100%;
+      max-width: 460px;
+      max-height: 420px;
+      object-fit: contain;
+      border-radius: 22px;
+      box-shadow: 0 24px 64px rgba(210,131,131,0.22);
+      animation: floatImg 5s ease-in-out infinite;
+    }
+
+    @keyframes floatImg {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-8px); }
+    }
+
+    @media (max-width: 760px) {
+      .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding: 3.5rem max(1.5rem, 4vw);
+        gap: 2.5rem;
+      }
+      .hero-sub, .hero-eyebrow { text-align: center; max-width: 100%; }
+      .hero-ctas { justify-content: center; }
+      .hero-img { order: -1; }
+      .hero-img img { max-width: 280px; }
+      .hero::before, .hero::after { display: none; }
+    }
+
+    /* ─── SECTION SHARED ─────────────────────────────────────────────────────── */
+    .section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 5rem max(1.5rem, 4vw);
+    }
+
+    .s-eyebrow {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--pink);
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .s-title {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(1.9rem, 4.5vw, 2.9rem);
+      font-weight: 600;
+      color: var(--ink);
+      text-align: center;
+      margin-bottom: 0.65rem;
+      line-height: 1.2;
+      text-wrap: balance;
+    }
+
+    .s-sub {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.97rem;
+      max-width: 500px;
+      margin: 0 auto 3rem;
+      line-height: 1.8;
+    }
+
+    hr.divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* ─── EMOTION CARDS ──────────────────────────────────────────────────────── */
+    .emotion-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.1rem;
+    }
+
+    .emotion-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem 1rem 1.75rem;
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: 20px;
+      text-decoration: none;
+      color: var(--ink);
+      gap: 0.55rem;
+      transition: transform 0.18s, box-shadow 0.18s, border-color 0.18s;
+    }
+    .emotion-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 14px 36px rgba(210,131,131,0.2);
+      border-color: var(--pink);
+      color: var(--ink);
+    }
+
+    .emotion-emoji { font-size: 2.6rem; line-height: 1; }
+    .emotion-name { font-weight: 700; font-size: 0.97rem; color: var(--ink); }
+    .emotion-tagline { font-size: 0.77rem; color: var(--muted); line-height: 1.5; }
+
+    @media (max-width: 560px) {
+      .emotion-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* ─── FEATURE CARDS ──────────────────────────────────────────────────────── */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(280px,100%), 1fr));
+      gap: 1.25rem;
+    }
+
+    .feature-card {
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: 20px;
+      padding: 2rem 1.75rem;
+      text-decoration: none;
+      color: var(--ink);
+      transition: transform 0.18s, box-shadow 0.18s;
+      display: flex;
+      flex-direction: column;
+    }
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 36px rgba(210,131,131,0.16);
+      color: var(--ink);
+    }
+
+    .feature-icon { font-size: 2.2rem; margin-bottom: 1rem; }
+    .feature-title { font-weight: 700; font-size: 1.07rem; color: var(--ink); margin-bottom: 0.5rem; }
+    .feature-desc { font-size: 0.87rem; color: var(--muted); line-height: 1.75; margin-bottom: 1.1rem; flex: 1; }
+    .feature-link { font-size: 0.84rem; color: var(--pink); font-weight: 700; }
+
+    /* ─── ABOUT TEASER ───────────────────────────────────────────────────────── */
+    .about-teaser {
+      background: var(--pink);
+      padding: 4.5rem max(1.5rem, 6vw);
+      text-align: center;
+    }
+
+    .about-teaser .quote-mark {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 4.5rem;
+      color: rgba(255,255,255,0.22);
+      line-height: 0.5;
+      display: block;
+      margin-bottom: 1rem;
+    }
+
+    .about-teaser p {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(1.35rem, 3vw, 1.9rem);
+      font-style: italic;
+      color: #fff;
+      max-width: 600px;
+      margin: 0 auto 2rem;
+      line-height: 1.6;
+    }
+
+    .about-teaser a {
+      display: inline-block;
+      background: #fff;
+      color: var(--pink);
+      font-weight: 700;
+      font-size: 0.92rem;
+      padding: 0.7rem 2.25rem;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: background 0.15s, color 0.15s;
+    }
+    .about-teaser a:hover { background: var(--cream); }
+
+    /* ─── FAQ ────────────────────────────────────────────────────────────────── */
+    .faq-wrap {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .faq-item { border-bottom: 1px solid var(--border); }
+
+    .faq-q {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 0;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font: 700 0.97rem "Lato", sans-serif;
+      color: var(--ink);
+      text-align: left;
+      gap: 1rem;
+    }
+    .faq-q:hover { color: var(--pink); }
+
+    .faq-icon {
+      color: var(--pink);
+      font-size: 1.5rem;
+      font-weight: 300;
+      flex-shrink: 0;
+      line-height: 1;
+      transition: transform 0.25s;
+    }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+    .faq-item.open .faq-a { max-height: 300px; }
+
+    .faq-a p {
+      padding: 0 0 1.3rem;
+      font-size: 0.93rem;
+      color: var(--muted);
+      line-height: 1.85;
+    }
+
+    /* ─── FOOTER ─────────────────────────────────────────────────────────────── */
+    .footer {
+      background: var(--vanilla);
+      padding: 3.5rem max(1.5rem, 4vw) 2rem;
+    }
+
+    .footer-inner { max-width: 1100px; margin: 0 auto; }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 2.5rem;
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid var(--dust);
+      margin-bottom: 1.75rem;
+    }
+
+    .footer-brand img {
+      height: 72px;
+      border-radius: 50%;
+      margin-bottom: 0.9rem;
+    }
+    .footer-brand p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.75;
+      max-width: 220px;
+    }
+
+    .footer-col h6 {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--pink);
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    .footer-col ul { list-style: none; padding: 0; margin: 0; }
+    .footer-col li { margin-bottom: 0.6rem; }
+    .footer-col a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.86rem;
+      transition: color 0.15s;
+    }
+    .footer-col a:hover { color: var(--pink); }
+
+    .social-row { display: flex; gap: 1rem; margin-top: 0.5rem; }
+    .social-row a { color: var(--muted); font-size: 1.1rem; transition: color 0.15s; }
+    .social-row a:hover { color: var(--pink); }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .footer-bottom p { font-size: 0.8rem; color: var(--muted); }
+
+    @media (max-width: 760px) {
+      .footer-top { grid-template-columns: 1fr 1fr; }
+      .footer-brand { grid-column: 1 / -1; }
+    }
+    @media (max-width: 440px) {
+      .footer-top { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── NAVBAR ─────────────────────────────────────────────────────────────── -->
+<header style="position:relative">
+  <nav class="nav">
+    <a class="nav-logo" href="index.html">
+      <img src="./Zenify/Zenify-logo.gif" alt="Zenify" />
+    </a>
+    <ul class="nav-links">
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="soundscapes.html">Soundscapes</a></li>
+      <li><a href="quiz.html">Wellness Quiz</a></li>
+      <li><a href="resource.html">Resources</a></li>
+      <li><a href="Login.html">Sign In</a></li>
+      <li><a href="SignUp.html" class="nav-cta">Join Us</a></li>
+    </ul>
+    <button class="nav-burger" id="burger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+  <div class="nav-mobile" id="mobileNav" role="navigation">
+    <a href="about.html">About Us</a>
+    <a href="soundscapes.html">Soundscapes</a>
+    <a href="quiz.html">Wellness Quiz</a>
+    <a href="resource.html">Resources</a>
+    <a href="Login.html">Sign In</a>
+    <a href="SignUp.html">Join Us →</a>
+  </div>
+</header>
+
+<!-- ─── HERO ──────────────────────────────────────────────────────────────── -->
+<section class="hero">
+  <div>
+    <p class="hero-eyebrow">✦ Your Emotions Journal ✦</p>
+    <h1>Your feelings,<br>given room to<br><em>breathe</em>.</h1>
+    <p class="hero-sub">A warm, private space to check in with yourself every day. Track your moods, reflect on your emotions, and find the support that's right for you.</p>
+    <div class="hero-ctas">
+      <a href="SignUp.html" class="btn-primary">Begin Journaling</a>
+      <a href="quiz.html" class="btn-outline">Take the Quiz</a>
+    </div>
+  </div>
+  <div class="hero-img">
+    <img src="./Zenify/mighty1.png" alt="A person at peace with their emotions" />
+  </div>
+</section>
+
+<!-- ─── EMOTION SELECTOR ─────────────────────────────────────────────────── -->
+<div class="section">
+  <p class="s-eyebrow">✦ Today's Check-In ✦</p>
+  <h2 class="s-title">How are you feeling right now?</h2>
+  <p class="s-sub">Choose the emotion closest to where you are. There are no wrong answers — every feeling is welcome here.</p>
+  <div class="emotion-grid">
+    <a href="depressed.html" class="emotion-card">
+      <span class="emotion-emoji" aria-hidden="true">😞</span>
+      <span class="emotion-name">Depressed</span>
+      <span class="emotion-tagline">You don't have to carry this alone</span>
+    </a>
+    <a href="sad.html" class="emotion-card">
+      <span class="emotion-emoji" aria-hidden="true">😐</span>
+      <span class="emotion-name">Sad</span>
+      <span class="emotion-tagline">It's okay to let yourself feel</span>
+    </a>
+    <a href="angry.html" class="emotion-card">
+      <span class="emotion-emoji" aria-hidden="true">😠</span>
+      <span class="emotion-name">Angry</span>
+      <span class="emotion-tagline">Your feelings are valid</span>
+    </a>
+    <a href="neutral.html" class="emotion-card">
+      <span class="emotion-emoji" aria-hidden="true">😊</span>
+      <span class="emotion-name">Neutral</span>
+      <span class="emotion-tagline">A quiet moment to check in</span>
+    </a>
+    <a href="happy.html" class="emotion-card">
+      <span class="emotion-emoji" aria-hidden="true">😄</span>
+      <span class="emotion-name">Happy</span>
+      <span class="emotion-tagline">Share and celebrate your joy</span>
+    </a>
+    <a href="excited.html" class="emotion-card">
+      <span class="emotion-emoji" aria-hidden="true">😬</span>
+      <span class="emotion-name">Excited</span>
+      <span class="emotion-tagline">Channel that energy forward</span>
+    </a>
+  </div>
+</div>
+
+<hr class="divider" />
+
+<!-- ─── FEATURES ──────────────────────────────────────────────────────────── -->
+<div class="section">
+  <p class="s-eyebrow">✦ How We Help ✦</p>
+  <h2 class="s-title">More than just a journal</h2>
+  <p class="s-sub">Zenify brings together tools, resources, and real support to help you understand and care for your mental health.</p>
+  <div class="feature-grid">
+    <a href="quiz.html" class="feature-card">
+      <span class="feature-icon">🧠</span>
+      <p class="feature-title">Wellness Check-In Quiz</p>
+      <p class="feature-desc">An 8-question check-in designed to help you understand how you're really doing — and point you toward the right next step.</p>
+      <span class="feature-link">Take the quiz →</span>
+    </a>
+    <a href="soundscapes.html" class="feature-card">
+      <span class="feature-icon">🎵</span>
+      <p class="feature-title">Serenity Soundscapes</p>
+      <p class="feature-desc">Curated lo-fi beats, rain sounds, and meditation music to help you slow down, focus, or drift off to sleep.</p>
+      <span class="feature-link">Open soundscapes →</span>
+    </a>
+    <a href="resource.html" class="feature-card">
+      <span class="feature-icon">📞</span>
+      <p class="feature-title">Support Resources</p>
+      <p class="feature-desc">Real helpline numbers, crisis support, mindfulness techniques, and evidence-based self-care tools — all in one place.</p>
+      <span class="feature-link">View resources →</span>
+    </a>
+  </div>
+</div>
+
+<!-- ─── ABOUT TEASER ──────────────────────────────────────────────────────── -->
+<div class="about-teaser">
+  <span class="quote-mark">"</span>
+  <p>Built with the belief that every emotion deserves a space to breathe, and every person deserves a place to land.</p>
+  <a href="about.html">Our story →</a>
+</div>
+
+<!-- ─── FAQ ───────────────────────────────────────────────────────────────── -->
+<div class="section">
+  <p class="s-eyebrow">✦ Common Questions ✦</p>
+  <h2 class="s-title">Frequently asked</h2>
+  <p class="s-sub" style="margin-bottom:2.5rem">Everything you need to know about Zenify.</p>
+  <div class="faq-wrap">
+
+    <div class="faq-item">
+      <button class="faq-q"><span>What is Zenify?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>Zenify is an online platform dedicated to helping you track your mental health and enhance your well-being through journaling and self-reflection tools. It's built to feel warm and human, not clinical.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q"><span>How can journaling on Zenify benefit my mental health?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>Journaling on Zenify provides a structured way to express your thoughts and feelings, leading to improved self-awareness, emotional regulation, and overall mental well-being.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q"><span>Is my journaling data private and secure?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>Your journal entries are stored only in your browser's local storage and never sent to any server. Your emotions are yours alone — we take that seriously.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q"><span>Does Zenify provide resources for anxiety, depression, or other challenges?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>Absolutely. Our Resources page offers helpline numbers, crisis support contacts, mindfulness techniques, and evidence-based self-care tools tailored to various mental health challenges.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q"><span>What sets Zenify apart from traditional journaling methods?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>Zenify combines emotion-guided prompts, a wellness check-in quiz, curated soundscapes, and real mental health resources into one warm, accessible space — so it meets you wherever you are.</p></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ─── FOOTER ─────────────────────────────────────────────────────────────── -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="./Zenify/zenify.png" alt="Zenify" />
+        <p>A warm, private space to check in with your emotions every day. You are not alone.</p>
+      </div>
+      <div class="footer-col">
+        <h6>Explore</h6>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="quiz.html">Wellness Quiz</a></li>
+          <li><a href="soundscapes.html">Soundscapes</a></li>
+          <li><a href="resource.html">Resources</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h6>Company</h6>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="#">Our Team</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Cookie Notice</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h6>Account</h6>
+        <ul>
+          <li><a href="Login.html">Sign In</a></li>
+          <li><a href="SignUp.html">Create Account</a></li>
+        </ul>
+        <h6 style="margin-top:1.5rem">Follow Us</h6>
+        <div class="social-row">
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+          <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2023 Zenify. All rights reserved.</p>
+      <p>Made with care 🌸</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Mobile nav toggle
+  const burger = document.getElementById('burger');
+  const mobileNav = document.getElementById('mobileNav');
+  burger.addEventListener('click', () => {
+    const open = mobileNav.classList.toggle('open');
+    burger.setAttribute('aria-expanded', open);
+  });
+
+  // Custom FAQ accordion
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.parentElement;
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+</script>
+
+</body>
+</html>

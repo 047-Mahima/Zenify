@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us — Zenify</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── Tokens ─────────────────────────────────────────────────────────────── */
+    :root {
+      --pink:    #d28383;
+      --pink-dk: #b86b6b;
+      --fog:     #e1acac;
+      --dust:    #eedcdc;
+      --blush:   #fde8e8;
+      --bg:      #fffaf4;
+      --card:    #ffffff;
+      --ink:     #3d2020;
+      --muted:   #9a7a7a;
+      --cream:   #fbf3f3;
+      --border:  #eedcdc;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Lato", sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+    }
+
+    /* ─── Nav ────────────────────────────────────────────────────────────────── */
+    .ab-nav {
+      background: var(--pink);
+      padding: 0.6rem max(1.5rem, 4vw);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .ab-nav img { height: 60px; }
+    .ab-nav a {
+      color: rgba(255,255,255,0.85);
+      font-size: 0.85rem; text-decoration: none;
+      transition: color 0.15s;
+    }
+    .ab-nav a:hover { color: #fff; }
+
+    /* ─── Hero ───────────────────────────────────────────────────────────────── */
+    .ab-hero {
+      background: linear-gradient(135deg, #fde8e8 0%, #fff7f0 50%, #fbf3f3 100%);
+      text-align: center;
+      padding: 4.5rem max(1.5rem, 6vw) 3.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .ab-hero::before {
+      content: "✦";
+      position: absolute; top: 2rem; left: 8%;
+      font-size: 1.5rem; color: var(--dust); opacity: 0.8;
+    }
+    .ab-hero::after {
+      content: "✦";
+      position: absolute; bottom: 2.5rem; right: 10%;
+      font-size: 1rem; color: var(--dust); opacity: 0.6;
+    }
+    .ab-hero .eyebrow {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--pink);
+      margin-bottom: 1.25rem;
+    }
+    .ab-hero h1 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+    .ab-hero h1 em { font-style: italic; color: var(--pink); }
+    .ab-hero p {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+
+    /* ─── Section wrapper ────────────────────────────────────────────────────── */
+    .section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 4rem max(1.5rem, 4vw);
+    }
+    .section-label {
+      font-size: 0.73rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--pink);
+      margin-bottom: 0.6rem;
+    }
+    .section-title {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(1.8rem, 4.5vw, 2.6rem);
+      color: var(--ink);
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      line-height: 1.25;
+    }
+
+    /* ─── Divider ────────────────────────────────────────────────────────────── */
+    .divider { border: none; border-top: 1px solid var(--border); }
+
+    /* ─── Story section ──────────────────────────────────────────────────────── */
+    .story-body {
+      font-size: 1.05rem;
+      color: #6b4a4a;
+      line-height: 1.9;
+    }
+    .story-body p + p { margin-top: 1.25rem; }
+    .story-body strong { color: var(--pink); font-weight: 700; }
+
+    /* ─── Profile card ───────────────────────────────────────────────────────── */
+    .profile-section {
+      background: var(--card);
+      border-radius: 22px;
+      border: 1.5px solid var(--border);
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 0;
+    }
+    .profile-img-col {
+      background: linear-gradient(160deg, #fde8e8, #f5d4d4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2.5rem 2rem;
+    }
+    .profile-photo {
+      width: 180px; height: 180px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid var(--pink);
+      box-shadow: 0 8px 32px rgba(210,131,131,0.25);
+    }
+    .profile-photo-placeholder {
+      width: 180px; height: 180px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--fog), var(--dust));
+      border: 4px solid var(--pink);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 4rem;
+      box-shadow: 0 8px 32px rgba(210,131,131,0.2);
+    }
+    .profile-text-col { padding: 2.5rem 2.5rem; }
+    .profile-name {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 2rem; font-weight: 600;
+      color: var(--ink); margin-bottom: 0.3rem;
+    }
+    .profile-role {
+      font-size: 0.85rem; color: var(--pink);
+      text-transform: uppercase; letter-spacing: 0.1em;
+      margin-bottom: 1.25rem;
+    }
+    .profile-bio {
+      font-size: 0.97rem; color: #6b4a4a;
+      line-height: 1.85; margin-bottom: 1.5rem;
+    }
+    .profile-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .profile-tag {
+      background: var(--cream);
+      border: 1.5px solid var(--border);
+      color: var(--muted);
+      font-size: 0.78rem; padding: 0.3rem 0.85rem;
+      border-radius: 20px;
+    }
+
+    /* ─── Values grid ────────────────────────────────────────────────────────── */
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr));
+      gap: 1.25rem;
+      margin-top: 2rem;
+    }
+    .value-card {
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: 16px;
+      padding: 1.75rem 1.5rem;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .value-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 28px rgba(210,131,131,0.12);
+    }
+    .value-icon { font-size: 2rem; margin-bottom: 0.85rem; }
+    .value-title {
+      font-weight: 700; color: var(--ink);
+      margin-bottom: 0.5rem; font-size: 1.05rem;
+    }
+    .value-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.7; }
+
+    /* ─── Mission strip ──────────────────────────────────────────────────────── */
+    .mission-strip {
+      background: var(--pink);
+      border-radius: 18px;
+      padding: 3rem 2.5rem;
+      text-align: center;
+      margin-top: 2.5rem;
+    }
+    .mission-strip .quote-mark {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 5rem; color: rgba(255,255,255,0.25);
+      line-height: 0; position: relative; top: 0.5rem;
+    }
+    .mission-strip p {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(1.3rem, 3vw, 1.75rem);
+      font-style: italic;
+      color: #fff;
+      line-height: 1.6;
+      max-width: 600px;
+      margin: 0.5rem auto 0;
+    }
+
+    /* ─── Footer ─────────────────────────────────────────────────────────────── */
+    .ab-footer {
+      background: #f4d4d4;
+      text-align: center;
+      padding: 2rem max(1.5rem, 4vw);
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+    .ab-footer a { color: var(--pink); text-decoration: none; }
+    .ab-footer a:hover { text-decoration: underline; }
+
+    /* ─── Responsive ─────────────────────────────────────────────────────────── */
+    @media (max-width: 640px) {
+      .profile-section { grid-template-columns: 1fr; }
+      .profile-img-col { padding: 2rem 2rem 1.5rem; }
+      .profile-photo, .profile-photo-placeholder { width: 140px; height: 140px; }
+      .profile-text-col { padding: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav class="ab-nav">
+  <a href="index.html"><img src="./Zenify/Zenify-logo.gif" alt="Zenify" /></a>
+  <a href="index.html">← Back to home</a>
+</nav>
+
+<!-- Hero -->
+<section class="ab-hero">
+  <p class="eyebrow">✦ Our Story ✦</p>
+  <h1>Built with <em>heart</em>,<br>for every feeling</h1>
+  <p>Zenify was created out of a simple belief: that every emotion deserves a space to breathe, and that small moments of reflection can change everything.</p>
+</section>
+
+<!-- The Story -->
+<div class="section">
+  <p class="section-label">How it began</p>
+  <h2 class="section-title">The story behind Zenify</h2>
+  <div class="story-body">
+    <p>
+      Zenify started as a personal project — a quiet corner of the internet designed to make mental wellness feel less clinical and more <strong>human</strong>. No charts with scary labels, no diagnostic forms. Just a warm, honest space to check in with how you're really doing.
+    </p>
+    <p>
+      The idea grew from a simple frustration: existing mental health tools felt either too clinical or too trivial. We wanted something in between — something that felt like a conversation with a kind friend rather than a clinical assessment.
+    </p>
+    <p>
+      Today, Zenify is still growing — adding new tools, soundscapes, and resources one step at a time. Every feature is built around a single question: <strong>does this help someone feel a little less alone?</strong>
+    </p>
+  </div>
+</div>
+
+<hr class="divider" />
+
+<!-- Creator profile -->
+<div class="section">
+  <p class="section-label">The creator</p>
+  <h2 class="section-title">Meet the person behind it</h2>
+
+  <div class="profile-section">
+    <div class="profile-img-col">
+      <!-- Replace src with your own photo if you have one, or remove the img and keep the placeholder div -->
+      <img
+        src="./Zenify/founder.jpg"
+        alt="Creator profile photo"
+        class="profile-photo"
+        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+      />
+      <div class="profile-photo-placeholder" style="display:none">🌸</div>
+    </div>
+    <div class="profile-text-col">
+      <!-- Replace the name, role, and bio below with your own details -->
+      <h3 class="profile-name">Mahima</h3>
+      <p class="profile-role">Founder &amp; Designer</p>
+      <p class="profile-bio">
+        Hi! I'm the person who built Zenify. I created this project because I believe that mental wellness shouldn't feel intimidating or out of reach. I wanted to build something warm, accessible, and genuinely useful — a place where reflecting on your feelings feels safe and even a little joyful.
+        <br><br>
+        When I'm not building Zenify, you'll find me journaling, listening to lo-fi music, or taking long walks with nowhere particular to go.
+      </p>
+      <div class="profile-tags">
+        <span class="profile-tag">Mental Wellness</span>
+        <span class="profile-tag">Community building</span>
+        <span class="profile-tag">Mindfulness</span>
+        <span class="profile-tag">Web Development</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider" />
+
+<!-- Values -->
+<div class="section">
+  <p class="section-label">What we stand for</p>
+  <h2 class="section-title">Our values</h2>
+  <div class="values-grid">
+    <div class="value-card">
+      <div class="value-icon">🌸</div>
+      <p class="value-title">Radical Warmth</p>
+      <p class="value-desc">Every design decision, every word on this site is written with the belief that people deserve to feel welcomed — especially on hard days.</p>
+    </div>
+    <div class="value-card">
+      <div class="value-icon">🔒</div>
+      <p class="value-title">Your Privacy Matters</p>
+      <p class="value-desc">Your journal entries are yours. We never sell data, never track emotions for advertising, and never make you feel watched.</p>
+    </div>
+    <div class="value-card">
+      <div class="value-icon">🌿</div>
+      <p class="value-title">Small Steps, Real Change</p>
+      <p class="value-desc">We don't promise transformation overnight. We believe in the quiet power of small, consistent acts of self-reflection.</p>
+    </div>
+    <div class="value-card">
+      <div class="value-icon">💬</div>
+      <p class="value-title">Honest, Not Clinical</p>
+      <p class="value-desc">Zenify speaks like a kind friend, not a textbook. Because the language of wellness should feel human, not intimidating.</p>
+    </div>
+    <div class="value-card">
+      <div class="value-icon">🤝</div>
+      <p class="value-title">You Are Not Alone</p>
+      <p class="value-desc">Everything on Zenify is built on the belief that isolation makes everything harder, and that connection — even a small one — can shift everything.</p>
+    </div>
+    <div class="value-card">
+      <div class="value-icon">🌻</div>
+      <p class="value-title">Always Growing</p>
+      <p class="value-desc">Zenify is a work in progress, just like all of us. We keep building, listening, and improving — one thoughtful update at a time.</p>
+    </div>
+  </div>
+
+  <!-- Mission quote -->
+  <div class="mission-strip">
+    <div class="quote-mark">"</div>
+    <p>Every emotion deserves a space to breathe. You deserve a place to land.</p>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="ab-footer">
+  <p>© 2023 Zenify. Made with care. &nbsp;·&nbsp; <a href="index.html">Home</a> &nbsp;·&nbsp; <a href="resource.html">Resources</a> &nbsp;·&nbsp; <a href="quiz.html">Wellness Quiz</a></p>
+</footer>
+
+</body>
+</html>

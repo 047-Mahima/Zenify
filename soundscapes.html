@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Serenity Soundscapes — Zenify</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── Tokens ─────────────────────────────────────────────────────────────── */
+    :root {
+      --pink:    #d28383;
+      --fog:     #c47070;
+      --dust:    #eedcdc;
+      --night:   #1e1012;
+      --dusk:    #2e1a1a;
+      --ember:   #3d2222;
+      --glow:    rgba(210,131,131,0.18);
+      --glow-sm: rgba(210,131,131,0.1);
+      --text:    #f5e4e4;
+      --muted:   #c8a0a0;
+      --cream:   #fbf3f3;
+      --tag-bg:  rgba(210,131,131,0.15);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Lato", sans-serif;
+      background: var(--night);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ─── Stars (CSS only) ───────────────────────────────────────────────────── */
+    body::before {
+      content: "";
+      position: fixed; inset: 0;
+      background-image:
+        radial-gradient(1px 1px at 12% 18%, rgba(255,220,220,0.7) 0%, transparent 100%),
+        radial-gradient(1px 1px at 35% 9%,  rgba(255,220,220,0.5) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 58% 22%, rgba(255,220,220,0.6) 0%, transparent 100%),
+        radial-gradient(1px 1px at 72% 5%,  rgba(255,220,220,0.45) 0%, transparent 100%),
+        radial-gradient(1px 1px at 88% 14%, rgba(255,220,220,0.55) 0%, transparent 100%),
+        radial-gradient(1px 1px at 25% 40%, rgba(255,220,220,0.3) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 91% 35%, rgba(255,220,220,0.5) 0%, transparent 100%),
+        radial-gradient(1px 1px at 47% 48%, rgba(255,220,220,0.35) 0%, transparent 100%),
+        radial-gradient(1px 1px at 64% 38%, rgba(255,220,220,0.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 8%  55%, rgba(255,220,220,0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 80% 60%, rgba(255,220,220,0.35) 0%, transparent 100%),
+        radial-gradient(2px 2px at 19% 70%, rgba(255,220,220,0.25) 0%, transparent 100%),
+        radial-gradient(1px 1px at 55% 75%, rgba(255,220,220,0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 39% 82%, rgba(255,220,220,0.2) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 95% 78%, rgba(255,220,220,0.3) 0%, transparent 100%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ─── Nav ────────────────────────────────────────────────────────────────── */
+    .ss-nav {
+      position: relative; z-index: 2;
+      background: rgba(30,16,18,0.85);
+      backdrop-filter: blur(10px);
+      padding: 0.75rem max(1.5rem, 4vw);
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid rgba(210,131,131,0.15);
+    }
+    .ss-nav img { height: 52px; }
+    .ss-nav a {
+      color: var(--muted); font-size: 0.85rem;
+      text-decoration: none; transition: color 0.15s;
+    }
+    .ss-nav a:hover { color: var(--pink); }
+
+    /* ─── Hero ───────────────────────────────────────────────────────────────── */
+    .ss-hero {
+      position: relative; z-index: 1;
+      text-align: center;
+      padding: 4rem max(1.5rem, 6vw) 3rem;
+    }
+    .ss-hero .eyebrow {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--pink);
+      margin-bottom: 1rem;
+    }
+    .ss-hero h1 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(2.4rem, 7vw, 4rem);
+      font-weight: 600;
+      line-height: 1.15;
+      color: var(--cream);
+      margin-bottom: 1rem;
+      text-wrap: balance;
+    }
+    .ss-hero h1 em {
+      font-style: italic;
+      color: var(--pink);
+    }
+    .ss-hero p {
+      font-size: 1rem;
+      color: var(--muted);
+      max-width: 480px;
+      margin: 0 auto;
+      line-height: 1.75;
+    }
+
+    /* ─── Divider ────────────────────────────────────────────────────────────── */
+    .ss-divider {
+      position: relative; z-index: 1;
+      text-align: center;
+      margin: 2rem 0 1.25rem;
+      color: var(--pink);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      display: flex; align-items: center;
+      gap: 1rem;
+      max-width: 1100px;
+      margin-left: auto; margin-right: auto;
+      padding: 0 max(1.5rem, 4vw);
+    }
+    .ss-divider::before,
+    .ss-divider::after {
+      content: ""; flex: 1;
+      height: 1px;
+      background: rgba(210,131,131,0.25);
+    }
+
+    /* ─── Grid ───────────────────────────────────────────────────────────────── */
+    .ss-grid {
+      position: relative; z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(340px, 100%), 1fr));
+      gap: 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 max(1.5rem, 4vw) 4rem;
+    }
+
+    /* ─── Video card ─────────────────────────────────────────────────────────── */
+    .vid-card {
+      background: var(--ember);
+      border: 1px solid rgba(210,131,131,0.18);
+      border-radius: 18px;
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .vid-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(210,131,131,0.18);
+    }
+
+    .vid-frame {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      display: block;
+      border: none;
+    }
+
+    .vid-info { padding: 1rem 1.25rem 1.25rem; }
+    .vid-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 0.6rem; }
+    .vid-tag {
+      background: var(--tag-bg);
+      border: 1px solid rgba(210,131,131,0.3);
+      color: var(--pink);
+      font-size: 0.7rem;
+      padding: 0.2rem 0.65rem;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .vid-title {
+      font-size: 0.97rem;
+      font-weight: 700;
+      color: var(--cream);
+      margin-bottom: 0.35rem;
+    }
+    .vid-desc {
+      font-size: 0.83rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ─── Footer note ────────────────────────────────────────────────────────── */
+    .ss-footer-note {
+      position: relative; z-index: 1;
+      text-align: center;
+      padding: 1.5rem max(1.5rem, 4vw) 3rem;
+      color: rgba(200,160,160,0.5);
+      font-size: 0.78rem;
+    }
+    .ss-footer-note a { color: var(--pink); text-decoration: none; }
+    .ss-footer-note a:hover { text-decoration: underline; }
+
+    @media (max-width: 420px) {
+      .ss-hero h1 { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav class="ss-nav">
+  <a href="index.html"><img src="./Zenify/Zenify-logo.gif" alt="Zenify" /></a>
+  <a href="index.html">← Back to home</a>
+</nav>
+
+<!-- Hero -->
+<section class="ss-hero">
+  <p class="eyebrow">✦ Zenify Soundscapes ✦</p>
+  <h1>Let sound carry you<br>to <em>stillness</em></h1>
+  <p>Close your eyes, breathe slowly, and let these carefully chosen sounds guide you toward calm. A moment just for you.</p>
+</section>
+
+<!-- Lo-fi & Study -->
+<div class="ss-divider">Lo-fi &amp; Study</div>
+<div class="ss-grid">
+
+  <div class="vid-card">
+    <iframe class="vid-frame"
+      src="https://www.youtube.com/embed/jfKfPfyJRdk?rel=0"
+      title="Lofi Hip Hop Radio — beats to relax and study"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen loading="lazy"></iframe>
+    <div class="vid-info">
+      <div class="vid-tags"><span class="vid-tag">Lo-fi</span><span class="vid-tag">Study</span><span class="vid-tag">Live</span></div>
+      <p class="vid-title">Lofi Hip Hop Radio</p>
+      <p class="vid-desc">The internet's favourite study companion. Mellow beats, soft melodies, and endless calm — perfect for focus or winding down.</p>
+    </div>
+  </div>
+
+  <div class="vid-card">
+    <iframe class="vid-frame"
+      src="https://www.youtube.com/embed/lTRiuFIWV54?rel=0"
+      title="Peaceful Piano — 8 Hours of Relaxing Sleep Music"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen loading="lazy"></iframe>
+    <div class="vid-info">
+      <div class="vid-tags"><span class="vid-tag">Piano</span><span class="vid-tag">Sleep</span><span class="vid-tag">8 Hours</span></div>
+      <p class="vid-title">Peaceful Piano — 8 Hours</p>
+      <p class="vid-desc">Soft, unhurried piano melodies designed to ease you into rest. Ideal for sleeping, reading, or a slow Sunday morning.</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- Nature Sounds -->
+<div class="ss-divider">Nature Sounds</div>
+<div class="ss-grid">
+
+  <div class="vid-card">
+    <iframe class="vid-frame"
+      src="https://www.youtube.com/embed/DWcJFNfaw9c?rel=0"
+      title="Relaxing Rain Sounds for Sleep"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen loading="lazy"></iframe>
+    <div class="vid-info">
+      <div class="vid-tags"><span class="vid-tag">Rain</span><span class="vid-tag">Nature</span><span class="vid-tag">Sleep</span></div>
+      <p class="vid-title">Gentle Rain Sounds</p>
+      <p class="vid-desc">The soft patter of rain on leaves. No music, just the rhythm of a quiet storm — one of the most universally calming sounds.</p>
+    </div>
+  </div>
+
+  <div class="vid-card">
+    <iframe class="vid-frame"
+      src="https://www.youtube.com/embed/eKFTSSKCfyE?rel=0"
+      title="Relaxing Forest Sounds — Birds and Stream"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen loading="lazy"></iframe>
+    <div class="vid-info">
+      <div class="vid-tags"><span class="vid-tag">Forest</span><span class="vid-tag">Birds</span><span class="vid-tag">Nature</span></div>
+      <p class="vid-title">Forest Birds &amp; Stream</p>
+      <p class="vid-desc">Morning birdsong and the gentle babble of a woodland stream. A sound bath straight from nature's own studio.</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- Meditation & Sleep -->
+<div class="ss-divider">Meditation &amp; Sleep</div>
+<div class="ss-grid">
+
+  <div class="vid-card">
+    <iframe class="vid-frame"
+      src="https://www.youtube.com/embed/77ZozI0rw7w?rel=0"
+      title="Relaxing Music for Meditation and Spa"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen loading="lazy"></iframe>
+    <div class="vid-info">
+      <div class="vid-tags"><span class="vid-tag">Meditation</span><span class="vid-tag">Spa</span><span class="vid-tag">Calm</span></div>
+      <p class="vid-title">Meditation &amp; Spa Music</p>
+      <p class="vid-desc">Slow, deliberate tones that invite the mind to settle. Use this during journaling, breathing exercises, or a quiet bath.</p>
+    </div>
+  </div>
+
+  <div class="vid-card">
+    <iframe class="vid-frame"
+      src="https://www.youtube.com/embed/1ZYbU82GVz4?rel=0"
+      title="Deep Sleep Music — Delta Waves"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen loading="lazy"></iframe>
+    <div class="vid-info">
+      <div class="vid-tags"><span class="vid-tag">Sleep</span><span class="vid-tag">Delta Waves</span><span class="vid-tag">Deep</span></div>
+      <p class="vid-title">Deep Sleep Music</p>
+      <p class="vid-desc">Gentle ambient frequencies layered to ease the transition into deep, restorative sleep. Leave it running through the night.</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- Footer note -->
+<div class="ss-footer-note">
+  <p>All videos are embedded from YouTube and belong to their respective creators. ✦ <a href="index.html">Back to home</a></p>
+</div>
+
+</body>
+</html>
